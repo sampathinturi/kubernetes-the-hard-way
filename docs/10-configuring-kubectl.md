@@ -12,11 +12,11 @@ Generate a kubeconfig file suitable for authenticating as the `admin` user:
 
 ```
 {
-  KUBERNETES_PUBLIC_ADDRESS=$(gcloud compute addresses describe kubernetes-the-hard-way \
+  KUBERNETES_PUBLIC_ADDRESS=$(gcloud compute addresses describe k8s-sam-way \
     --region $(gcloud config get-value compute/region) \
     --format 'value(address)')
 
-  kubectl config set-cluster kubernetes-the-hard-way \
+  kubectl config set-cluster k8s-sam-way \
     --certificate-authority=ca.pem \
     --embed-certs=true \
     --server=https://${KUBERNETES_PUBLIC_ADDRESS}:6443
@@ -25,11 +25,11 @@ Generate a kubeconfig file suitable for authenticating as the `admin` user:
     --client-certificate=admin.pem \
     --client-key=admin-key.pem
 
-  kubectl config set-context kubernetes-the-hard-way \
-    --cluster=kubernetes-the-hard-way \
+  kubectl config set-context k8s-sam-way \
+    --cluster=k8s-sam-way \
     --user=admin
 
-  kubectl config use-context kubernetes-the-hard-way
+  kubectl config use-context k8s-sam-way
 }
 ```
 
@@ -62,9 +62,9 @@ kubectl get nodes
 
 ```
 NAME       STATUS   ROLES    AGE    VERSION
-worker-0   Ready    <none>   117s   v1.12.0
-worker-1   Ready    <none>   118s   v1.12.0
-worker-2   Ready    <none>   118s   v1.12.0
+worker-0   Ready    <none>   117s   v1.14.1
+worker-1   Ready    <none>   118s   v1.14.1
+worker-2   Ready    <none>   118s   v1.14.1
 ```
 
 Next: [Provisioning Pod Network Routes](11-pod-network-routes.md)

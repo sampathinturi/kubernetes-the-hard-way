@@ -7,7 +7,7 @@ In this lab you will deploy the [DNS add-on](https://kubernetes.io/docs/concepts
 Deploy the `coredns` cluster add-on:
 
 ```
-kubectl apply -f https://storage.googleapis.com/kubernetes-the-hard-way/coredns.yaml
+kubectl apply -f https://storage.googleapis.com/k8s-sam-way/coredns.yaml
 ```
 
 > output

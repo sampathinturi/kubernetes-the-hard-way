@@ -9,11 +9,11 @@ In this section you will verify the ability to [encrypt secret data at rest](htt
 Create a generic secret:
 
 ```
-kubectl create secret generic kubernetes-the-hard-way \
+kubectl create secret generic k8s-sam-way \
   --from-literal="mykey=mydata"
 ```
 
-Print a hexdump of the `kubernetes-the-hard-way` secret stored in etcd:
+Print a hexdump of the `k8s-sam-way` secret stored in etcd:
 
 ```
 gcloud compute ssh controller-0 \
@@ -22,7 +22,7 @@ gcloud compute ssh controller-0 \
   --cacert=/etc/etcd/ca.pem \
   --cert=/etc/etcd/kubernetes.pem \
   --key=/etc/etcd/kubernetes-key.pem\
-  /registry/secrets/default/kubernetes-the-hard-way | hexdump -C"
+  /registry/secrets/default/k8s-sam-way | hexdump -C"
 ```
 
 > output
@@ -177,9 +177,9 @@ NODE_PORT=$(kubectl get svc nginx \
 Create a firewall rule that allows remote access to the `nginx` node port:
 
 ```
-gcloud compute firewall-rules create kubernetes-the-hard-way-allow-nginx-service \
+gcloud compute firewall-rules create k8s-sam-way-allow-nginx-service \
   --allow=tcp:${NODE_PORT} \
-  --network kubernetes-the-hard-way
+  --network k8s-sam-way
 ```
 
 Retrieve the external IP address of a worker instance:

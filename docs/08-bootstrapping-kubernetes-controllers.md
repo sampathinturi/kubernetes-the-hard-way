@@ -28,10 +28,10 @@ Download the official Kubernetes release binaries:
 
 ```
 wget -q --show-progress --https-only --timestamping \
-  "https://storage.googleapis.com/kubernetes-release/release/v1.12.0/bin/linux/amd64/kube-apiserver" \
-  "https://storage.googleapis.com/kubernetes-release/release/v1.12.0/bin/linux/amd64/kube-controller-manager" \
-  "https://storage.googleapis.com/kubernetes-release/release/v1.12.0/bin/linux/amd64/kube-scheduler" \
-  "https://storage.googleapis.com/kubernetes-release/release/v1.12.0/bin/linux/amd64/kubectl"
+  "https://storage.googleapis.com/kubernetes-release/release/v1.14.1/bin/linux/amd64/kube-apiserver" \
+  "https://storage.googleapis.com/kubernetes-release/release/v1.14.1/bin/linux/amd64/kube-controller-manager" \
+  "https://storage.googleapis.com/kubernetes-release/release/v1.14.1/bin/linux/amd64/kube-scheduler" \
+  "https://storage.googleapis.com/kubernetes-release/release/v1.14.1/bin/linux/amd64/kubectl"
 ```
 
 Install the Kubernetes binaries:
@@ -337,7 +337,7 @@ EOF
 
 ## The Kubernetes Frontend Load Balancer
 
-In this section you will provision an external load balancer to front the Kubernetes API Servers. The `kubernetes-the-hard-way` static IP address will be attached to the resulting load balancer.
+In this section you will provision an external load balancer to front the Kubernetes API Servers. The `k8s-sam-way` static IP address will be attached to the resulting load balancer.
 
 > The compute instances created in this tutorial will not have permission to complete this section. Run the following commands from the same machine used to create the compute instances.
 
@@ -348,7 +348,7 @@ Create the external load balancer network resources:
 
 ```
 {
-  KUBERNETES_PUBLIC_ADDRESS=$(gcloud compute addresses describe kubernetes-the-hard-way \
+  KUBERNETES_PUBLIC_ADDRESS=$(gcloud compute addresses describe k8s-sam-way \
     --region $(gcloud config get-value compute/region) \
     --format 'value(address)')
 
@@ -357,8 +357,8 @@ Create the external load balancer network resources:
     --host "kubernetes.default.svc.cluster.local" \
     --request-path "/healthz"
 
-  gcloud compute firewall-rules create kubernetes-the-hard-way-allow-health-check \
-    --network kubernetes-the-hard-way \
+  gcloud compute firewall-rules create k8s-sam-way-allow-health-check \
+    --network k8s-sam-way \
     --source-ranges 209.85.152.0/22,209.85.204.0/22,35.191.0.0/16 \
     --allow tcp
 
@@ -378,10 +378,10 @@ Create the external load balancer network resources:
 
 ### Verification
 
-Retrieve the `kubernetes-the-hard-way` static IP address:
+Retrieve the `k8s-sam-way` static IP address:
 
 ```
-KUBERNETES_PUBLIC_ADDRESS=$(gcloud compute addresses describe kubernetes-the-hard-way \
+KUBERNETES_PUBLIC_ADDRESS=$(gcloud compute addresses describe k8s-sam-way \
   --region $(gcloud config get-value compute/region) \
   --format 'value(address)')
 ```
@@ -398,7 +398,7 @@ curl --cacert ca.pem https://${KUBERNETES_PUBLIC_ADDRESS}:6443/version
 {
   "major": "1",
   "minor": "12",
-  "gitVersion": "v1.12.0",
+  "gitVersion": "v1.14.1",
   "gitCommit": "0ed33881dc4355495f623c6f22e7dd0b7632b7c0",
   "gitTreeState": "clean",
   "buildDate": "2018-09-27T16:55:41Z",

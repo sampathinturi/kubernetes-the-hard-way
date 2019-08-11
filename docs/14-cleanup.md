@@ -25,21 +25,21 @@ Delete the external load balancer network resources:
 
   gcloud -q compute http-health-checks delete kubernetes
 
-  gcloud -q compute addresses delete kubernetes-the-hard-way
+  gcloud -q compute addresses delete k8s-sam-way
 }
 ```
 
-Delete the `kubernetes-the-hard-way` firewall rules:
+Delete the `k8s-sam-way` firewall rules:
 
 ```
 gcloud -q compute firewall-rules delete \
-  kubernetes-the-hard-way-allow-nginx-service \
-  kubernetes-the-hard-way-allow-internal \
-  kubernetes-the-hard-way-allow-external \
-  kubernetes-the-hard-way-allow-health-check
+  k8s-sam-way-allow-nginx-service \
+  k8s-sam-way-allow-internal \
+  k8s-sam-way-allow-external \
+  k8s-sam-way-allow-health-check
 ```
 
-Delete the `kubernetes-the-hard-way` network VPC:
+Delete the `k8s-sam-way` network VPC:
 
 ```
 {
@@ -50,6 +50,6 @@ Delete the `kubernetes-the-hard-way` network VPC:
 
   gcloud -q compute networks subnets delete kubernetes
 
-  gcloud -q compute networks delete kubernetes-the-hard-way
+  gcloud -q compute networks delete k8s-sam-way
 }
 ```

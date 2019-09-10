@@ -21,16 +21,19 @@ gcloud compute ssh controller-0
 Download the official etcd release binaries from the [coreos/etcd](https://github.com/coreos/etcd) GitHub project:
 
 ```
-wget -q --show-progress --https-only --timestamping \
-  "https://github.com/coreos/etcd/releases/download/v3.3.12/etcd-v3.3.12-linux-amd64.tar.gz"
+ETCD_VER=v3.4.0
+GOOGLE_URL=https://storage.googleapis.com/etcd
+DOWNLOAD_URL=${GOOGLE_URL}
+wget -q --show-progress --https-only --timestamping ${DOWNLOAD_URL}/${ETCD_VER}/etcd-${ETCD_VER}-linux-amd64.tar.gz
 ```
 
 Extract and install the `etcd` server and the `etcdctl` command line utility:
 
 ```
 {
-  tar -xvf etcd-v3.3.12-linux-amd64.tar.gz
-  sudo mv etcd-v3.3.12-linux-amd64/etcd* /usr/local/bin/
+  ETCD_VER=v3.4.0
+  tar -xvf etcd-${ETCD_VER}-linux-amd64.tar.gz
+  sudo mv etcd-${ETCD_VER}-linux-amd64/etcd* /usr/local/bin/
 }
 ```
 
